@@ -1,0 +1,717 @@
+/* ==========================================================================
+   1. VARIABLES Y CONFIGURACIÓN BASE (PC Primero)
+   ========================================================================== */
+:root {
+    /* Colores de Fondo */
+    --fondo-oscuro-principal: #030712; /* El negro Azulado de Fondo*/
+    --fondo-tarjeta: #081026; /* El azul oscuro de los bloques */
+
+    /* Colores de Acento (azules y celestes) */
+    --azul-electrico: #0052ff; /* Color de botones y enlaces */
+    --celeste-brillante: #00c6ff; /* El tono claro del degradado */
+    --resplandor-azul: rgba(0, 82, 255, 0.4); /* Para los efectos de brillo (glow) */
+    
+    /* Colores de textos */
+    --texto-blanco: #ffffff; /* Titulos principales */
+    --texto-gris-suave: #94a3b8; /* Texto secundario y parrafos*/
+
+    /* Degradado Listo (Corregido con su ; al final) */
+    --degradado-azul: linear-gradient(90deg, var(--azul-electrico), var(--celeste-brillante));
+    --fuente-principal: 'Montserrat', sans-serif;
+}
+
+/* RESETEO GLOBAL */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Hace que el padding no estire los elementos */
+}
+
+/* EVITA COMPORTAMIENTOS RAROS EN EL SCROLL */
+html {
+    scroll-behavior: smooth; /* Hace que al hacer clic en el menú, baje de forma suave */
+    height: 100%;
+} 
+
+/* ESTILOS BASE PARA EL CUERPO DE LA WEB */
+body {
+    background-color: var(--fondo-oscuro-principal);
+    color: var(--texto-gris-suave);
+    font-family: var(--fuente-principal);
+    line-height: 1.6; /* Espaciado cómodo entre líneas de texto */
+    overflow-x: hidden; /* Evita desbordes horizontales */
+    background-image: linear-gradient(rgba(255, 255, 255, 0.01) 1px, transparent 1px);
+    background-size: 40px 40px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+    margin-top: 80px; /* Margen para que el menú fijo no tape el contenido */
+}
+
+/* ESTILOS PARA BOTONES Y ENLACES */
+a {
+    text-decoration: none; /* Quita la línea subrayada */
+    color: inherit; /* Hereda el color del elemento contenedor */
+}
+
+ul {
+    list-style: none; /* Quita los puntos negros de las listas */
+}
+
+img {
+    max-width: 100%;
+    display: block; /* Evita espacios vacíos debajo de la imagen */
+}
+
+
+/* ==========================================================================
+   2. COMPONENTES GLOBALES (PC)
+   ========================================================================== */
+
+/* ENCABEZADO PRINCIPAL (HEADER UNIFICADO) */
+.encabezado {
+    display: flex;
+    justify-content: space-between; /* Separa logo, menú y botón */
+    align-items: center; /* Los centra verticalmente */
+    padding: 20px 8%; /* Espacio interno lateral */
+    background-color: rgba(3, 7, 18, 0.8); /* Fondo oscuro semitransparente */
+    backdrop-filter: blur(12px); /* Efecto esmerilado de fondo */
+    position: fixed; /* Se queda fijo arriba al hacer scroll */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03); /* Línea divisoria sutil */
+}
+
+/* LOGO Y NOMBRE DE MARCA */
+.marca {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.marca-logo {
+    height: 40px;
+    width: auto;
+}
+
+.marca-texto {
+    display: flex;
+    flex-direction: column;
+}
+
+.marca-nombre {
+    color: var(--texto-blanco);
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.marca-subtitulo {
+    color: var(--texto-gris-suave);
+    font-size: 0.8rem;
+    font-weight: 400;
+}
+
+/* MENÚ DE NAVEGACIÓN */
+.menu {
+    display: flex;
+    gap: 32px;
+}
+
+.menu-enlace {
+    color: var(--texto-gris-suave);
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.menu-enlace:hover {
+    color: var(--texto-blanco);
+}
+
+/* BOTÓN DE CONTACTO (ESTILO GENERAL) */
+.boton-contactar {
+    background: var(--azul-electrico);
+    color: var(--texto-blanco);
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    box-shadow: 0 4px 15px rgba(0, 82, 255, 0.3);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: inline-block;
+}
+
+.boton-contactar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 82, 255, 0.5);
+}
+
+.boton-contactar:active {
+    transform: translateY(0);
+}
+
+/* CONFIGURACIÓN INICIAL DE CONTROL DEL MENÚ HAMBURGUESA */
+.check-entrada, .icono-hamburguesa {
+    display: none; /* Ocultos por defecto en computadoras */
+}
+
+.movil-only { 
+    display: none; /* No se muestra en PC */
+}
+
+
+/* ==========================================================================
+   3. SECCIONES DE LA PÁGINA (PC)
+   ========================================================================== */
+
+/* SECCION HERO */
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 85vh;
+    padding: 80px 8% 40px 8%;
+    gap: 40px;
+    position: relative;
+    background-color: transparent;
+}
+
+.hero-contenido {
+    flex: 1;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+/* Insignia / Badge Superior (Corregido nombre de clase) */
+.etiqueta-badge {
+    align-self: flex-start;
+    background-color: rgba(0, 82, 255, 0.1);
+    color: var(--celeste-brillante);
+    border: 1px solid rgba(0, 82, 255, 0.3);
+    padding: 6px 16px;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.hero-titulo {
+    color: var(--texto-blanco);
+    font-size: 3.2rem;
+    font-weight: 800;
+    line-height: 1.2;
+}
+
+.texto-degradado {
+    background: var(--degradado-azul);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+}
+
+.hero-descriptivo {
+    color: var(--texto-gris-suave);
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+.hero-botones {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    margin-top: 8px;
+}
+
+.btn-primario {
+    background: var(--azul-electrico);
+    color: var(--texto-blanco);
+    padding: 14px 28px;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-primario:hover {
+    background-color: #0044d6; 
+    transform: translateY(-2px);
+}
+
+.btn-secundario {
+    background-color: transparent;
+    color: var(--texto-blanco);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 14px 28px;
+    border-radius: 8px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.btn-secundario:hover {
+    background-color: rgba(255, 255, 255, 0.03);
+    border-color: var(--azul-electrico);
+}
+
+.flecha-abajo {
+    transition: transform 0.3s ease;
+}
+
+.btn-secundario:hover .flecha-abajo {
+    transform: translateY(3px);
+}
+
+.hero-imagen-contenedor {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    position: relative;
+} 
+
+/* Resplandor trasero (Corregido error ortográfico de clase) */
+.hero-imagen-contenedor::before {
+    content: "";
+    position: absolute;
+    width: 320px;
+    height: 320px;
+    background-color: var(--azul-electrico);
+    border-radius: 50%;
+    filter: blur(130px);
+    opacity: 0.45;
+    z-index: 1;
+}
+
+.hero-imagen {
+    max-width: 90%;
+    height: auto;
+    position: relative;
+    z-index: 2;
+    filter: drop-shadow(0 60px 40px rgba(0, 82, 255, 0.2));
+}
+
+/* --- SECCIÓN SERVICIOS --- */
+.servicios-seccion {
+    padding: 80px 8%;
+    background-color: transparent;
+}
+
+.servicios-cabecera {
+    text-align: center;
+    margin-bottom: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.servicios-titulo {
+    color: var(--texto-blanco);
+    font-size: 2.2rem;
+    font-weight: 700;
+}
+
+.linea-decorativa {
+    width: 60px;
+    height: 4px;
+    background: var(--degradado-azul);
+    border-radius: 2px;
+}
+
+.servicios-grid {
+    display: grid;
+    /* Ajustado a un mínimo de 280px para evitar desbordes laterales */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.tarjeta-servicio {
+    background-color: var(--fondo-tarjeta);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    padding: 40px 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), 
+                border-color 0.3s ease, 
+                box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.tarjeta-icono-contenedor {
+    background-color: rgba(0, 82, 255, 0.1);
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(0, 82, 255, 0.2);
+    margin-bottom: 8px;
+}
+
+.icono-img{
+ width: 50px;
+ height: 50px;
+ border-radius: 10px;
+ border: 1px solid rgba(0, 82, 255, 0.2);
+}
+
+.tarjeta-icono {
+    width: 24px;
+    height: 24px;
+}
+
+.tarjeta-titulo {
+    color: var(--texto-blanco);
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+
+.tarjeta-descripcion {
+    color: var(--texto-gris-suave);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.tarjeta-servicio:hover {
+    transform: translateY(-8px);
+    border-color: rgba(0, 82, 255, 0.4);
+    box-shadow: 0 10px 30px rgba(0, 82, 255, 0.15);
+}
+
+/* --- SECCIÓN PROCESO --- */
+.proceso-seccion {
+    padding: 80px 8%;
+    background-color: transparent;
+}
+
+.proceso-cabecera {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.proceso-titulo {
+    color: var(--texto-blanco);
+    font-size: 2.2rem;
+    font-weight: 700;
+}
+
+.proceso-grid {
+    display: grid;
+    /* Ajustado a un mínimo de 250px para celulares */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 24px;
+}
+
+.paso-card {
+    background-color: var(--fondo-tarjeta);
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    border-radius: 12px;
+    padding: 30px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    position: relative;
+    transition: border-color 0.3s ease, transform 0.3s ease;
+}
+
+.paso-card:hover {
+    border-color: rgba(0, 82, 255, 0.3);
+    transform: translateY(-3px);
+}
+
+.paso-numero {
+    width: 36px;
+    height: 36px;
+    background-color: var(--azul-electrico);
+    color: var(--texto-blanco);
+    font-size: 0.95rem;
+    font-weight: 700;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 15px rgba(0, 82, 255, 0.4);
+}
+
+.paso-titulo {
+    color: var(--texto-blanco);
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.paso-descripcion {
+    color: var(--texto-gris-suave);
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+/* --- SECCIÓN CTA --- */
+.cta-seccion {
+    padding: 60px 8% 80px 8%;
+    display: flex;
+    justify-content: center;
+}
+
+.cta-tarjeta {
+    background-color: var(--fondo-tarjeta);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    width: 100%;
+    max-width: 1000px;
+    padding: 60px 40px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: inset 0 -20px 50px rgba(0, 82, 255, 0.08); 
+}
+
+.cta-titulo {
+    color: var(--texto-blanco);
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.cta-subtitulo {
+    color: var(--texto-gris-suave);
+    font-size: 1.1rem;
+    font-weight: 400;
+    margin-bottom: 12px;
+}
+
+.boton-presupuesto {
+    background: var(--azul-electrico);
+    color: var(--texto-blanco);
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 14px 32px;
+    border-radius: 50px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 4px 20px rgba(0, 82, 255, 0.4);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+.boton-presupuesto:hover {
+    transform: translateY(-3px);
+    background-color: #0044d6;
+    box-shadow: 0 8px 25px rgba(0, 82, 255, 0.6);
+}
+
+.icono-whatsapp {
+    fill: currentColor;
+}
+
+/* --- PIE DE PÁGINA (FOOTER) --- */
+.pie-pagina {
+    border-top: 1px solid rgba(255, 255, 255, 0.03);
+    padding: 40px 8%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    background-color: var(--fondo-oscuro-principal);
+}
+
+.copyright {
+    color: rgba(255, 255, 255, 0.3);
+    font-size: 0.85rem;
+}
+
+.redes-sociales {
+    display: flex;
+    gap: 20px;
+}
+
+.red-enlace {
+    color: rgba(255, 255, 255, 0.4);
+    transition: color 0.3s ease, transform 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.red-enlace:hover {
+    color: var(--celeste-brillante);
+    transform: translateY(-2px);
+}
+
+
+/* ==========================================================================
+   4. SECCIÓN RESPONSIVE (Strictly at the Bottom)
+   ========================================================================== */
+
+/* --- TABLETS Y CELULARES MEDIANOS (Menos de 992px) --- */
+@media (max-width: 992px) {
+  
+    /* Ocultamos el botón "Contactar" de la barra principal del header */
+    .contenedor-boton-escritorio {
+        display: none; 
+    }
+
+    /* Activamos y mostramos el botón dentro del menú desplegable lateral */
+    .movil-only {
+        display: block;
+        margin-top: 30px;
+        text-align: center;
+    }
+
+    /* Mostramos el icono de las 3 rayitas de la hamburguesa */
+    .icono-hamburguesa {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        cursor: pointer;
+        z-index: 1001;
+        margin-left: auto; /* Desplaza el icono a la punta derecha de forma natural */
+    }
+
+    .icono-hamburguesa .linea {
+        width: 30px;
+        height: 3px;
+        background-color: var(--texto-blanco);
+        border-radius: 5px;
+        transition: 0.3s ease;
+    }
+
+    /* Comportamiento del Menú Lateral Desplegable */
+    .menu {
+        position: fixed;
+        top: 0;
+        right: -100%; /* Inicia oculto a la derecha de la pantalla */
+        width: 75%;
+        height: 100vh;
+        background-color: var(--fondo-tarjeta);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transition: 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        box-shadow: -10px 0 30px rgba(0, 0, 0, 0.6);
+    }
+
+    .menu-enlace {
+        font-size: 1.4rem;
+        padding: 15px;
+        width: 100%;
+        text-align: center;
+    }
+
+    /* LÓGICA DE APERTURA (Checkbox Hack) */
+    .check-entrada:checked ~ .menu {
+        right: 0;
+    }
+
+    /* Animación para formar la 'X' */
+    .check-entrada:checked ~ .icono-hamburguesa .linea:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+    .check-entrada:checked ~ .icono-hamburguesa .linea:nth-child(2) {
+        opacity: 0;
+    }
+    .check-entrada:checked ~ .icono-hamburguesa .linea:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+
+    /* Rediseño del Hero en pantallas táctiles */
+    .hero {
+        flex-direction: column-reverse; /* El texto va abajo y la ilustración arriba */
+        text-align: center;
+        padding-top: 120px;
+        gap: 50px;
+    }
+
+    .hero-contenido {
+        align-items: center;
+    }
+
+    .etiqueta-badge {
+        align-self: center;
+    }
+
+    .hero-titulo {
+        font-size: 2.3rem;
+    }
+
+    .hero-botones {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .btn-primario, .btn-secundario {
+        width: 100%;
+        justify-content: center;
+    }
+  
+    .hero-imagen {
+        max-width: 70%;
+    }
+}
+
+/* --- CELULARES CHICOS (Pantallas de 480px o menos) --- */
+@media (max-width: 480px) {
+    /* Achicamos tipografía del Hero para evitar desbordes en pantallas angostas */
+    .hero-titulo {
+        font-size: 1.8rem;
+        word-wrap: break-word; /* Evita que palabras largas se corten bruscamente */
+    }
+
+    .hero-descriptivo {
+        font-size: 0.95rem;
+    }
+
+    /* Achicamos paddings laterales para ganar área de lectura */
+    .hero, .servicios-seccion, .proceso-seccion, .cta-seccion {
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+
+    /* Ajustamos el ancho del panel del menú móvil para pantallas angostas */
+    .menu {
+        width: 85%;
+    }
+
+    /* Reducimos el padding interno de tarjetas para que no aprieten el texto */
+    .tarjeta-servicio {
+        padding: 30px 20px;
+    }
+
+    .paso-card {
+        padding: 24px 16px;
+    }
+
+    /* Tarjeta de llamado a la acción */
+    .cta-tarjeta {
+        padding: 40px 20px;
+    }
+
+    .cta-titulo {
+        font-size: 1.6rem;
+    }
+
+    .cta-subtitulo {
+        font-size: 0.95rem;
+    }
+
+    .boton-presupuesto {
+        width: 100%;
+        justify-content: center;
+    }
+}
